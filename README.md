@@ -33,7 +33,7 @@ Annual movement events are dated at the calendar-year level. The estimation prog
   CohortPanelMaker.py          Build balanced event cohorts and diagnostics
   KappaControlYearQuarter.py   Prepare common-ownership controls
   pipeline_config.py           Paths, roster variants, and sample definitions
-3_event_study/
+2_event_study/
   did_imputation_event_study.do   Dynamic did_imputation specifications
   ddd_atc3sharing.do               ATC3-sharing triple-difference specifications
 ```
@@ -101,8 +101,8 @@ The Kappa builder exposes command-line options for the holdings inputs, CUSIP ma
 Run the Stata programs after cohort and Kappa outputs are available:
 
 ```stata
-do 3_event_study/did_imputation_event_study.do
-do 3_event_study/ddd_atc3sharing.do
+do 2_event_study/did_imputation_event_study.do
+do 2_event_study/ddd_atc3sharing.do
 ```
 
 Both programs accept optional positional filters for roster variant, personnel definition, requirement level, fixed effects, outcome, treatment side, event type, control group, and Kappa specification.
