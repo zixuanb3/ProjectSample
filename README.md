@@ -25,17 +25,17 @@ Annual movement events are dated at the calendar-year level. The estimation prog
 ## Repository layout
 
 ```text
-python/
-  build_ssr_roster.py       Build imputed and sentinel-dropped annual rosters
-  build_raw_events.py       Construct movement candidates and firm interlocks
-  build_event_tables.py     Create req0/req1/req2 firm-event tables
-  build_firm_panels.py      Merge events with SSR firm-product outcomes
-  build_cohorts.py          Build balanced event cohorts and diagnostics
-  build_kappa_controls.py   Prepare common-ownership controls
-  pipeline_config.py        Paths, roster variants, and sample definitions
-stata/
-  event_study.do            Dynamic did_imputation specifications
-  atc_sharing_ddd.do        ATC3-sharing triple-difference specifications
+1_data_prep/
+  build_ssr_roster.py          Build imputed and sentinel-dropped annual rosters
+  RawEventTableMaker.py        Construct movement candidates and firm interlocks
+  EventTableMaker.py           Create req0/req1/req2 firm-event tables
+  PanelMaker_FirmLevel.py      Merge events with SSR firm-product outcomes
+  CohortPanelMaker.py          Build balanced event cohorts and diagnostics
+  KappaControlYearQuarter.py   Prepare common-ownership controls
+  pipeline_config.py           Paths, roster variants, and sample definitions
+3_event_study/
+  did_imputation_event_study.do   Dynamic did_imputation specifications
+  ddd_atc3sharing.do               ATC3-sharing triple-difference specifications
 ```
 
 ## Required inputs
@@ -88,12 +88,12 @@ Optional variables:
 From the repository root:
 
 ```powershell
-python python/build_ssr_roster.py
-python python/build_raw_events.py
-python python/build_event_tables.py
-python python/build_firm_panels.py
-python python/build_cohorts.py
-python python/build_kappa_controls.py --help
+python 1_data_prep/build_ssr_roster.py
+python 1_data_prep/RawEventTableMaker.py
+python 1_data_prep/EventTableMaker.py
+python 1_data_prep/PanelMaker_FirmLevel.py
+python 1_data_prep/CohortPanelMaker.py
+python 1_data_prep/KappaControlYearQuarter.py --help
 ```
 
 The Kappa builder exposes command-line options for the holdings inputs, CUSIP map, and selected variants. Review `--help` before the first run.
@@ -101,8 +101,8 @@ The Kappa builder exposes command-line options for the holdings inputs, CUSIP ma
 Run the Stata programs after cohort and Kappa outputs are available:
 
 ```stata
-do stata/event_study.do
-do stata/atc_sharing_ddd.do
+do 3_event_study/did_imputation_event_study.do
+do 3_event_study/ddd_atc3sharing.do
 ```
 
 Both programs accept optional positional filters for roster variant, personnel definition, requirement level, fixed effects, outcome, treatment side, event type, control group, and Kappa specification.
