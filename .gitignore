@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Restricted or generated research data
+InterimData/
+RawData/
+data/
+csv/
+figures/
+logs/
+tex/
+*.dta
+*.parquet
+
+# Local configuration
+.env
+.DS_Store
+Thumbs.db
